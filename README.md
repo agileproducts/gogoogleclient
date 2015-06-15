@@ -15,6 +15,6 @@ These can be taken from the corresponding values in the json file which can be d
 
 ## Dependencies
 
-golang.org/x/oauth2
-golang.org/x/oauth2/google
-github.com/stretchr/testify/assert
+* golang.org/x/oauth2
+* golang.org/x/oauth2/google
+* github.com/stretchr/testify/assert

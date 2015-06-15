@@ -6,14 +6,27 @@ package gogoogleclient
 import (
   "os"
   "log"
+  "fmt"
   "encoding/json"
-  _ "golang.org/x/oauth2"
-  _ "golang.org/x/oauth2/google"
+  "net/http"
+  "golang.org/x/oauth2"
+  "golang.org/x/oauth2/google"
 )
 
+// Client returns a google service client
+func Client(scope string) *http.Client {
+  fmt.Println(scope)
+  configVariables := loadConfigurationVariables()
+  jwtConfig, error := google.JWTConfigFromJSON(configVariables, scope)
+  if error != nil {
+    log.Fatal(error)
+  }
+  client := jwtConfig.Client(oauth2.NoContext)
+  return client
+}
 
-// LoadConfigurationVariables gets the service account info from environment variables and returns them as json
-func LoadConfigurationVariables() []byte {
+// loadConfigurationVariables gets the service account info from environment variables and returns them as json
+func loadConfigurationVariables() []byte {
   keyMap := map[string]string {
     "Email" : os.Getenv("GOOGLE_CLIENT_EMAIL"),
     "PrivateKey" : os.Getenv("GOOGLE_PRIVATE_KEY"),
