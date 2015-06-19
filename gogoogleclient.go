@@ -7,7 +7,7 @@ import (
   "os"
   "log"
   "fmt"
-  "encoding/json"
+  "io/ioutil"
   "net/http"
   "golang.org/x/oauth2"
   "golang.org/x/oauth2/google"
@@ -16,7 +16,7 @@ import (
 // Client returns a google service client
 func Client(scope string) *http.Client {
   fmt.Println(scope)
-  configVariables := loadConfigurationVariables()
+  configVariables := loadApplicationCredentials()
   jwtConfig, error := google.JWTConfigFromJSON(configVariables, scope)
   if error != nil {
     log.Fatal(error)
@@ -26,19 +26,10 @@ func Client(scope string) *http.Client {
 }
 
 // loadConfigurationVariables gets the service account info from environment variables and returns them as json
-func loadConfigurationVariables() []byte {
-  keyMap := map[string]string {
-    "Email" : os.Getenv("GOOGLE_CLIENT_EMAIL"),
-    "PrivateKey" : os.Getenv("GOOGLE_PRIVATE_KEY"),
+func loadApplicationCredentials() []byte {
+  credentialFile,error := ioutil.ReadFile(os.Getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+  if error != nil {
+    log.Fatal(error)
   }
-  for key, value := range keyMap {
-    if value == "" {
-      log.Fatal(key + " environment variable not set")
-    }
-  }
-  jsonMap,err := json.Marshal(keyMap)
-  if err != nil {
-    log.Fatal(err)
-  }
-  return jsonMap
+  return credentialFile
 }

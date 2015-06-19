@@ -4,14 +4,20 @@ A golang package to help with creating service accounts to google api services.
 
 ## Environment
 
-The authentication information needed to connect to a Google service account should be stored in two environment variables
+The authentication information needed to connect to a Google service account should be downloaded as a json file from the Google 
+[developer console](https://developers.google.com/console).
+
+The location of this file should then be stored in the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. 
+
+## Usage
+
+The Client method returns an authenticated http client for the given API scope:
 
 ```
-GOOGLE_CLIENT_EMAIL
-GOOGLE_PRIVATE_KEY
-```
+client := gogoogleclient.Client("https://www.googleapis.com/auth/analytics") 
+data, error := client.Get(appropriate http request to API)
 
-These can be taken from the corresponding values in the json file which can be downloaded from the Google developer console.
+```
 
 ## Dependencies
 

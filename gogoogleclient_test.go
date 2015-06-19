@@ -12,7 +12,8 @@ func TestClient(test *testing.T) {
   assert.NotNil(test, client, "It should return an http client for a valid scope")
 }
 
-func TestLoadConfigurationVariables(test *testing.T) {
-  jsonconfig := loadConfigurationVariables()
+func TestLoadApplicationCredentials(test *testing.T) {
+  jsonconfig := loadApplicationCredentials()
   assert.NotNil(test, jsonconfig, "It should extract the relevant environment variables as JSON")
 }
+
