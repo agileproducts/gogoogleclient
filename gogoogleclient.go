@@ -6,7 +6,6 @@ package gogoogleclient
 import (
   "os"
   "log"
-  "fmt"
   "io/ioutil"
   "net/http"
   "golang.org/x/oauth2"
@@ -15,7 +14,6 @@ import (
 
 // Client returns a google service client
 func Client(scope string) *http.Client {
-  fmt.Println(scope)
   configVariables := loadApplicationCredentials()
   jwtConfig, error := google.JWTConfigFromJSON(configVariables, scope)
   if error != nil {
