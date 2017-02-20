@@ -1,5 +1,5 @@
 .DS_Store
 *.tmp
 vendor/*/
-client_secret*.json
+gtm*.json
 .env
