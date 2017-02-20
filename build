@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e # fail on error
+
+export GOOGLE_APPLICATION_CREDENTIALS
+echo "Building project"
+govendor test 
+golint 
+govendor install
+go fmt 
+echo "Built and tested"
