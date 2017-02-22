@@ -4,7 +4,7 @@ set -e # fail on error
 
 export GOOGLE_APPLICATION_CREDENTIALS
 echo "Building project"
-govendor test 
+govendor test
 golint 
 govendor install
 go fmt 

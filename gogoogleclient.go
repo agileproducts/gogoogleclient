@@ -4,6 +4,7 @@ Package gogoogleclient helps service apps connect to google apis
 package gogoogleclient
 
 import (
+	_ "github.com/joho/godotenv/autoload"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"io/ioutil"
